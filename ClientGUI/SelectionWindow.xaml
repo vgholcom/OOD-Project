@@ -1,0 +1,33 @@
+﻿<!-- 
+//////////////////////////////////////////////////////////////////////
+// CSE687 - Object Oriented Design                                  //
+//                                                                  //
+// Yuexin Yu                                                        //
+// yyu100@syr.edu                                                   //
+//////////////////////////////////////////////////////////////////////
+  -->
+
+<Window x:Class="GUI.SelectionWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GUI"
+        mc:Ignorable="d"
+        Title="Please Confirm The Slected Dll File: " Height="166.364" Width="612.728" Loaded="Window_Loaded" Unloaded="Window_Unloaded" WindowStartupLocation="CenterScreen">
+
+    <Grid Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="81*"/>
+            <RowDefinition Height="77*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+        </Grid.ColumnDefinitions>
+        <ListBox x:Name="Selections" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" FontFamily="tahoma"></ListBox>
+        <Button x:Name="Clear" Content="Cancel" Grid.Row="1" Grid.Column="0" FontFamily="tahoma" Click="Clear_Click" Margin="190,17,30,15"/>
+        <Button x:Name="Done" Content="Confirm" Grid.Row="1" Grid.Column="1" FontFamily="tahoma" Click="Done_Click" Margin="30,17,188,15"/>
+    </Grid>
+    
+</Window>
