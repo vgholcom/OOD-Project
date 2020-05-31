@@ -1,8 +1,0 @@
-﻿  TestHarness.cpp
-C:\Users\Tori\source\repos\OOD-Project\TestHarness\TestHarness.cpp(136,24): warning C4129: 'p': unrecognized character escape sequence
-C:\Users\Tori\source\repos\OOD-Project\TestHarness\TestHarness.cpp(136,24): warning C4129: 'd': unrecognized character escape sequence
-C:\Users\Tori\source\repos\OOD-Project\TestHarness\TestHarness.cpp(137,24): warning C4129: 'p': unrecognized character escape sequence
-C:\Users\Tori\source\repos\OOD-Project\TestHarness\TestHarness.cpp(137,24): warning C4129: 'd': unrecognized character escape sequence
-C:\Users\Tori\source\repos\OOD-Project\TestHarness\TestHarness.cpp(138,24): warning C4129: 'p': unrecognized character escape sequence
-C:\Users\Tori\source\repos\OOD-Project\TestHarness\TestHarness.cpp(138,24): warning C4129: 'd': unrecognized character escape sequence
-  TestHarness.vcxproj -> C:\Users\Tori\source\repos\OOD-Project\Debug\TestHarness.exe

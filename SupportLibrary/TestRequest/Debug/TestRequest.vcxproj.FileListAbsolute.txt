@@ -1,0 +1,2 @@
+C:\Users\Tori\source\repos\TestHarnessProject - Working-Ver-2\Debug\TestRequest.pdb
+C:\Users\Tori\source\repos\TestHarnessProject - Working-Ver-2\SupportLibrary\TestRequest\Debug\TestRequest.pdb

@@ -1,0 +1,3 @@
+﻿  Message.cpp
+C:\Users\Tori\source\repos\TestHarnessProject - Working-Ver-2\SupportLibrary\Message\Message.cpp(289,27): warning C4018: '<': signed/unsigned mismatch
+  Message.vcxproj -> C:\Users\Tori\source\repos\TestHarnessProject - Working-Ver-2\Debug\Message.lib

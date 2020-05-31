@@ -1,0 +1,29 @@
+
+  Testing Converter class
+  
+ ---------------------
+  
+  Test Name:   Demo2
+  
+  Author: Fawcett
+  
+ ---------------------
+  [Test Description] Test if Box wrapps primitive type or not.
+  The get_primitive method should return a 
+  value with type which template specified 
+  
+ ---------------------
+  [Test Case 1] Expected return type name by toString Method: class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >
+  [Test Case 1] Expected return type name by toValue Method: int
+  [Test Case 1] Returned return type name by toString Method: class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >
+  [Test Case 1] Returned return type name by toValue Method: int
+  
+  --[Result] test case 1 passed!
+  [Test Case 2] Expected return type name by toString Method: class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >
+  [Test Case 2] Expected return type name by toValue Method: char
+  [Test Case 2] Returned return type name by toString Method: class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >
+  [Test Case 2] Returned return type name by toValue Method: char
+  
+  --[Result] test case 2 passed!
+  [Final Result] --Test Passed!
+  

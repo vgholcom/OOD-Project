@@ -13,7 +13,7 @@ using System.Windows;
 [assembly: AssemblyCompany("Syracuse University")]
 [assembly: AssemblyProduct("Client GUI")]
 [assembly: AssemblyCopyright("CSE687 - Object Oriented Design")]
-[assembly: AssemblyTrademark("")]
+[assembly: AssemblyTrademark("Yuexin Yu")]
 [assembly: AssemblyCulture("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible

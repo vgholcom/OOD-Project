@@ -1,6 +1,8 @@
 ﻿//////////////////////////////////////////////////////////////////////
-// CSE687 - Object Oriented Design                                  //
 // Yuexin Yu                                                        //
+// CSE 687 Object Oriented Design C++                               //
+// Syracuse University                                              //
+// Design Project: Test Harness                                     //
 // yyu100@syr.edu                                                   //
 //                                                                  //
 // MainWindow class                                                 //
@@ -69,13 +71,13 @@ namespace GUI
 
             // Client Port
             from_ = new CsEndPoint();
-            from_.machineAddress = "Client GUI Host";
-            from_.port = 8888;
+            from_.machineAddress = "localhost";
+            from_.port = 8099;
 
             // Server Port
             to_ = new CsEndPoint();
-            to_.machineAddress = "Test Harness Server Host";
-            to_.port = 8999;
+            to_.machineAddress = "localhost";
+            to_.port = 8888;
 
             from_string = from_.machineAddress + ": " + from_.port;
             to_string = to_.machineAddress + ": " + to_.port;
@@ -352,10 +354,10 @@ namespace GUI
         // Send message to Testharness server
         private void Send_Click(object sender, RoutedEventArgs e)
         {
-            msg.add("SendingTo_", to_string);
-            msg.add("Comesfrom_", from_string);
-            msg.add("TestRequestTitle_", tq_name.Text.ToString());
-            msg.add("OperatorName_", tq_author.Text.ToString());
+            msg.add("to", to_string);
+            msg.add("from", from_string);
+            msg.add("name", tq_name.Text.ToString()); 
+            msg.add("author", tq_author.Text.ToString());
             msg.add("command", "testReq");
 
             update_status("Sending test request to Test Harness server @" + to_string);

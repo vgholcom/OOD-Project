@@ -1,0 +1,2 @@
+C:\Users\Tori\source\repos\TestHarnessProject - Working-Ver-2\Debug\Message.pdb
+C:\Users\Tori\source\repos\TestHarnessProject - Working-Ver-2\SupportLibrary\Message\Debug\Message.pdb

@@ -1,6 +1,8 @@
 ﻿//////////////////////////////////////////////////////////////////////
-// CSE687 - Object Oriented Design                                  //
 // Yuexin Yu                                                        //
+// CSE 687 Object Oriented Design C++                               //
+// Syracuse University                                              //
+// Design Project: Test Harness                                     //
 // yyu100@syr.edu                                                   //
 //                                                                  //
 // This package defines one class SelectionWindow that provides a   //
@@ -65,22 +67,6 @@ namespace GUI
         // Save selected files to current test request
         private void Done_Click(object sender, RoutedEventArgs e)
         {
-            //mWin.msg.clear();
-
-            //new Thread(() =>
-            //{
-            //    this.Dispatcher.Invoke(new Action(() =>
-            //    {
-            //        mWin.show_dlls.Items.Clear();
-            //    }));
-            //}).Start();
-
-            //int count = 0;
-
-            //if (!mWin.selectedFiles.Contains(item))
-            //{ }
-            //foreach (string item in mWin.selectedFiles)
-            //{
             int count = mWin.selectedFiles.Count() - 1;
 
             string key = "sendingFile_" + count;

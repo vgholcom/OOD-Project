@@ -1,14 +1,13 @@
 ﻿/*
+ *-------------------------------------
+ * Yuexin Yu
+ * CSE 687 Object Oriented Design C++
+ * Syracuse University
+ * Design Project: Test Harness
+ *-------------------------------------
  * File Name: App.xaml.cs
  * Project Name: GUI
  * Required Files:
- * ----------
- * ----------
- * Created: Friday, 30th November 2018 11:35:13 am
- * Author: Zidong Yu (zyu107@syr.edu)
- * Description: 
- * ----------
- * ----------
  * Last Modified: Monday, 3rd December 2018 5:04:06 pm
  * Modified By:
  * ----------

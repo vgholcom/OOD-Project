@@ -1,0 +1,2 @@
+C:\Users\Tori\source\repos\TestHarnessProject - Working-Ver-2\Debug\Sockets.pdb
+C:\Users\Tori\source\repos\TestHarnessProject - Working-Ver-2\SupportLibrary\Sockets\Debug\Sockets.pdb
