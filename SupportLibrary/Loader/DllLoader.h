@@ -1,50 +1,38 @@
-////////////////////////////////////////////////////////////////////////////
-// DllLoader.h : Test-Driver-DLL loader that uses ITests.h as protocole   //
-// ver 2.0                                             					  //
-////////////////////////////////////////////////////////////////////////////
-/*
-*  Package description:
-* ======================
-*  This package loads Test-Driver DLLs that follow the ITests protocol
-*  defined in ITests.h
-*
-*  The protocol forces all TestDrivers to have an implementation of ITests
-*  interface which holds a collection of ITest pointers. This package will
-*  attempt to load the DLL, get an instance of ITests* and retrieve the
-*  std::vector<ITest*> contained within the DLL.
-*
-*  This header file contains a ILogger class which helps each test driver
-*  creates its own instance of Logger. DllLoader class is also provided to
-*  load and extract collection of tests from test libraries (DLLs).
-*  Required files:
-* =================
-*  ITests.h
-*  TestUtilities.h
-*/
+#ifndef DLLLOADER_H
+#define DLLLOADER_H
 
-#include "ITests.h"
-#include "../Utilities/Utilities.h"
 #include <string>
-#include <vector>
-#include <iostream>
-#include <windows.h>
+#include <Windows.h>
+#include <ctime>
+#include <stdexcept>
 
-using namespace std;
-using namespace Utilities;
+using std::string;
 
-class DllLoader
-{
-public:
-	DllLoader();
-	~DllLoader();
-	bool loadAndExtract(const std::string& dll);
-	const std::vector<Utilities::ITest*>& tests() const;
-	void clear();  // unloads the DLL (if loaded) and clears all extracted tests
-
-private:
-	std::vector<Utilities::ITest*> extractedTests_;  // contains the set of tests extracted from the TestDriver DLL
-	HMODULE hmod;  // handle to the loaded DLL
+struct TestResult {
+	string dll_path_;
+	bool test_result_;
+	string log_message_;
 };
 
-bool doTests(DllLoader& loader, Utilities::SingletonLoggerFactory<1, Utilities::NoLock>* pRes);
-std::wstring toWstring(const std::string& s);
+//class DLLLoader will load a DLL from provided path and provide option to test the function inside DLL
+class DllLoader {
+public:
+	DllLoader(const string& dll_path);
+	void TestITest();
+	~DllLoader();
+	TestResult getTestResult() const;
+
+private:
+	string dll_path_;
+	HINSTANCE hDll_;
+	bool itest_result_;
+	string log_message_;
+
+	void appendLogMessage(const string& message);
+	string getDllPath() const;
+	string getLogMessage() const;
+	bool getItestBoolResult() const;
+
+};
+
+#endif

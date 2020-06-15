@@ -12,7 +12,7 @@ using System.Windows;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Syracuse University")]
 [assembly: AssemblyProduct("Client GUI")]
-[assembly: AssemblyCopyright("CSE687 - Object Oriented Design")]
+[assembly: AssemblyCopyright("CSE687 - Object Oriented Design - GitHub: https://github.com/Yuexin-Gary-Yu/TestHarnessProject - GG.Drive: https://drive.google.com/file/d/1nMumZ9Jv6bcLNePKspaO1g8DV4VznRWU/view?usp=sharing")]
 [assembly: AssemblyTrademark("Yuexin Yu")]
 [assembly: AssemblyCulture("")]
 

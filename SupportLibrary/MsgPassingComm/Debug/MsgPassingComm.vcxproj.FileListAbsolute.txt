@@ -1,2 +1,2 @@
-C:\Users\Tori\source\repos\TestHarnessProject - Working-Ver-2\Debug\MsgPassingComm.pdb
-C:\Users\Tori\source\repos\TestHarnessProject - Working-Ver-2\SupportLibrary\MsgPassingComm\Debug\MsgPassingComm.pdb
+C:\Users\Tori\source\repos\Project_4_TestHarness_Source_Code-master\Debug\MsgPassingComm.pdb
+C:\Users\Tori\source\repos\Project_4_TestHarness_Source_Code-master\SupportLibrary\MsgPassingComm\Debug\MsgPassingComm.pdb

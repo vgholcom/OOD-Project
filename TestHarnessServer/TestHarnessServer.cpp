@@ -1,9 +1,11 @@
 /*
  *-------------------------------------
- * Barry L Armour, Huan Doan, Victoria Tenney, Yuexin Yu
+ * Yuexin Yu, Victoria Tenney
  * CSE 687 Object Oriented Design C++
  * Syracuse University
  * Design Project: Test Harness
+ *
+ * Victoria Tenney
  *-------------------------------------
  * Implemented member functions in TestHarness class.
  * Defined the entry point for TestHarness package.
@@ -125,27 +127,46 @@ namespace Testing
 		while (true)
 		{
 			MsgPassingCommunication::Message msg = comm_.getMessage();
-			std::cout << "\n\n-- Test_Harness_Server Has Received Messages: " + msg.name();
-
+			std::cout << "\n\n-- Test_Harness_Server Has Received Messages: " + msg.command();
 			if (msg.command() == "ready")
 			{
 				std::cout << "\n\n-- Test_Harness_Server enqueues a Ready_Message From A Child_Tester..";
 				readyQ_.enQ(msg);
 			}
-			else if (msg.command() == "testReq")
+			else if (msg.command() == "XMLmsg")
 			{
-				std::cout << "\n\n-- Test_Harness_Server enqueues a Test_Request_Message From GUI_Client..";
-				requestQ_.enQ(msg);
+				std::cout << "\n\n-- Test_Harness_Server enqueues a XML_Test_Request_Message..";
+
+				XmlReader rdr(msg.xml());
+				XmlReader::attribElems attribs = rdr.attributes();
+				while (rdr.next())
+				{
+					std::string currTag = rdr.tag().c_str();
+					if (!currTag.compare("file"))
+					{
+						// enqueue file 
+						MsgPassingCommunication::Message enqMsg;
+						enqMsg.to(msg.to()); enqMsg.from(msg.from()); enqMsg.command("testReq");
+						enqMsg.name(msg.name()); enqMsg.attribute("author", msg.value("author"));
+						enqMsg.file(rdr.body().c_str());
+						requestQ_.enQ(enqMsg);
+					}
+				}
+
 			}
 			else if (msg.command() == "stop")
 			{
 				std::cout << "\n\n-- Test_Harness_Server enqueues Stop_Testing_Message..";
 				requestQ_.enQ(msg);
 			}
+			else if (msg.command() == "testReq")
+			{
+				// NOTE: This is just how the file transfer is done, dont need if using XML msg
+				//std::cout << "\n\n-- Test_Harness_Server enqueues a Test_Request_Message..";
+			}
 			else
 			{
 				std::cout << "\n\n-- Test_Harness_Server has received an invalid message command.." << msg.command();
-				std::cout << "\n-- Message title: " << msg.name();
 			}
 		}
 	}
@@ -156,16 +177,24 @@ namespace Testing
 	{
 		while (true)
 		{
-			MsgPassingCommunication::Message trMsg = requestQ_.deQ();
-			std::cout << "\n-- Test_Harness_Server_Dispatch deQ Request_Message: " + trMsg.command();
+			if (requestQ_.size() > 0)
+			{
+				if (readyQ_.size() > 0)
+				{
+					MsgPassingCommunication::Message trMsg = requestQ_.deQ();
+					std::cout << "\n-- Test_Harness_Server_Dispatch deQ Request_Message: " + trMsg.command();
 
-			MsgPassingCommunication::Message rdyMsg = readyQ_.deQ();
-			std::cout << "\n-- Test_Harness_Server_Dispatch deQ Ready_Message: " + rdyMsg.command();
+					MsgPassingCommunication::Message rdyMsg = readyQ_.deQ();
+					std::cout << "\n-- Test_Harness_Server_Dispatch deQ Ready_Message: " + rdyMsg.command();
 
-			// Sending a request to ready child
-			trMsg.to(rdyMsg.from());  
-			std::cout << "\n-- Test_Harness_Server_Dispatch Sending Message to Child Tester: " + trMsg.command();
-			comm_.postMessage(trMsg);
+					// Sending a request to ready child
+					trMsg.to(rdyMsg.from());
+
+					trMsg.show();
+					std::cout << "\n-- Test_Harness_Server_Dispatch Sending Message to Child Tester: " + trMsg.command();
+					comm_.postMessage(trMsg);
+				}
+		    }
 		}
 	}
 

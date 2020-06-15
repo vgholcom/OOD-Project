@@ -1,13 +1,16 @@
 /*
  *-------------------------------------
- * Barry L Armour, Huan Doan, Victoria Tenney, Yuexin Yu
+ * Yuexin Yu, Victoria Tenney
  * CSE 687 Object Oriented Design C++
  * Syracuse University
  * Design Project: Test Harness
+ * yyu100@syr.edu
+ *
+ * Huan Doan
  *-------------------------------------
- * This file defines each member function in ChildTester class. 
+ * This file defines each member function in ChildTester class.
  * The entry point of Child Tester package is also included.
- * Child tester's ip address and port are assigned by TestHarness server. 
+ * Child tester's ip address and port are assigned by TestHarness server.
  * Parameters are passed from TestHarness Server to Child tester through the Process Pooling framework.
  */
 
@@ -26,7 +29,7 @@
 using namespace MsgPassingCommunication;
 
 // Constructor for Child Tester class, setup its ip address and port number, start Comm instance
-Testing::ChildTester::ChildTester(std::string name, std::string &address, size_t &port, std::string &to_address, size_t &to_port) 
+Testing::ChildTester::ChildTester(std::string name, std::string& address, size_t& port, std::string& to_address, size_t& to_port)
 	:name_(name), to_(to_address, to_port), from_(address, port), childComm_(from_, "Comm")
 {
 	childComm_.start();
@@ -58,13 +61,13 @@ Testing::ChildTester::~ChildTester()
 }
 
 // Set file receive path for Comm instance 
-void Testing::ChildTester::setSaveFilePath(std::string &save_path)
+void Testing::ChildTester::setSaveFilePath(std::string& save_path)
 {
 	childComm_.setSaveFilePath(save_path);
 }
 
 // Set file send path for Comm instance 
-void Testing::ChildTester::setSendFilePath(std::string &send_path)
+void Testing::ChildTester::setSendFilePath(std::string& send_path)
 {
 	childComm_.setSendFilePath(send_path);
 }
@@ -100,74 +103,60 @@ void Testing::ChildTester::doTest()
 	ready.to(to_);
 	ready.command("ready");
 
-	logger_->write("\n-- Tester Sending Mesage to Server: " + ready.command()); 
+	logger_->write("\n-- Tester Sending Mesage to Server: " + ready.command());
 	childComm_.postMessage(ready);
 	bool result = true;
-
+	std::string logMsg = "";
 	while (true)
 	{	
 		MsgPassingCommunication::Message msg = childComm_.getMessage();
 
-		logger_->write("\n-------------------- Attention --------------------");
-		logger_->write("\n\n-- Tester " + from_.toString() + " Has Received A Message: " + msg.name());
-
-		logger_->write("\n\n-------------------- Message Content --------------------");
-		logger_->write("\n\n-- Message Title: " + msg.name());
-		logger_->write("\n-- Message Command: " + msg.value("command"));
-		logger_->write("\n-- Message Operator: " + msg.value("author"));
-		logger_->write("\n-- Message From: " + msg.from().toString()); 
-
-		std::vector<std::string> dlls = msg.dll_value("sendingFile");
-		logger_->write("\n-- Message File: ");
-
-		for (std::string item : dlls) 
-			logger_->write("                      " + item + "\n");
-
-		logger_->write("\n");
-
 		if (msg.command() == "testReq")
 		{
-			logger_->write("\n\n-------------------- Test Task Starts --------------------");
+			logger_->write("\n-------------------- Attention --------------------");
+			logger_->write("\n\n-- Tester " + from_.toString() + " Has Received A Message: " + msg.name());
+
+			logger_->write("\n\n-------------------- Message Content --------------------");
+			logger_->write("\n\n-- Message Title: " + msg.name());
+			logger_->write("\n-- Message Command: " + msg.value("command"));
+			logger_->write("\n-- Message Operator: " + msg.value("author"));
+			logger_->write("\n-- Message From: " + msg.from().toString());
+
+			std::vector<std::string> dlls = msg.dll_value("sendingFile");
+			logger_->write("\n-- Message File: ");
+
+			for (std::string item : dlls)
+				logger_->write("                      " + item + "\n");
+
+			logger_->write("\n");
+
+			logger_->write("\n\n-------------------- Test Task Starts --------------------\n");
 
 			for (int i = 0; i < dlls.size(); i++)
 			{	
-				std::string fileSpec = path_ + "\\" + dlls[i]; 
-				dllLoader_.clear(); 
-				bool load_check = dllLoader_.loadAndExtract(fileSpec);
+				std::string fileSpec = path_ + "\\" + dlls[i];
+				logger_->write("\n\n-- File Is Sucessfully Loaded: " + fileSpec);
+				logger_->write("\n-- Executing Tests Extracted From: " + fileSpec);
 
-				if (!load_check) 
-				{ 
-					logger_->write("\n\n-- Can't load " + fileSpec + "!!!!\n"); 
-					test_res = false; 
-				}
-				else 
+				logger_->write("\n\n-------------------- Test Result --------------------\n");
+
+				DllLoader dllLoader = DllLoader(fileSpec);
+				dllLoader.TestITest();
+				TestResult testResult = dllLoader.getTestResult();
+				result = testResult.test_result_;
+				logMsg = testResult.log_message_;
+
+				if (testResult.test_result_)
 				{
-					logger_->write("\n\n-- File Is Sucessfully Loaded: " + fileSpec);
-					logger_->write("\n-- Executing Tests Extracted From: " + fileSpec);
-
-					logger_->write("\n\n-------------------- Test Result --------------------");
-					test_res = doTests(dllLoader_, logger_factory); 
-					result &= test_res;
-
-					if (test_res)
-					{
-						logger_->write("\n\n-- All Tests Passed In The Test Driver Library: " + fileSpec + "-- ^;^\n");
-					}
-					else 
-					{ 
-						logger_->write("\n-- At Least One Test Failed In The Test Driver Library: " + fileSpec + "--!\n"); 
-					}
-
-					logger_->write("\n-- Detailed log file for each test library is named: log_" + msg.name() + ".txt");
-					logger_->write("\n-- Test report summary is named: [Child_Tester_Name]_log.txt");
-					logger_->write("\n-- Only test report summary will be sent back to client in the"); 
-					logger_->write("\n-- form of Message.");
+					logger_->write("\n\n-- All Tests Passed In The Test Driver Library: " + fileSpec + "-- ^;^\n");
 				}
+				else
+				{
+					logger_->write("\n-- At Least One Test Failed In The Test Driver Library: " + fileSpec + "--!\n");
+					logger_->write("\n----  " + logMsg);
+				}
+
 			}
-
-			logger_->write("\n--------------------------------------------------------\n");
-			logger_->write("\n-- Send Logging Result Back To GUI Client...\n");
-
 			MsgPassingCommunication::Message log_res_msg;
 			log_res_msg.command("result");
 			DateTime dt; 
@@ -179,19 +168,17 @@ void Testing::ChildTester::doTest()
 			if (result) 
 				res = "------ Passed ------"; 
 			else 
-				res = "------ Failed ------";
+				res = "------ Failed ------\n"+ logMsg;
 
 			log_res_msg.attribute("result", res);
 			log_res_msg.attribute("author", msg.value("author"));
 			log_res_msg.attribute("dll", dlls[0]);
 			log_res_msg.attribute("time", dt.now());
-			log_res_msg.attribute("log", logFileSpec);
 
-			logger_->write("\n------------------------Test Ends-----------------------\n");
 			log_file_.flush();
 
 			childComm_.postMessage(log_res_msg);
-		    childComm_.postMessage(ready);
+			childComm_.postMessage(ready);
 	    }
 	}
 }
@@ -217,19 +204,19 @@ int main(int argc, char *argv[])
 
 	//Handle parameters sent by Testharness server
 	std::string addr_to = argv[0];
-	size_t port_to = stoi(argv[1]);
+	size_t port_to = std::stoi(argv[1]);
 	std::string child_name = argv[2];
 	std::string addr_from = argv[3];
-	size_t port_from = stoi(argv[4]);
+	size_t port_from = std::stoi(argv[4]);
 	std::string send_path = argv[5];
 	std::string receive_path = argv[6];
 
 	std::cout << "\n\n\nChild_Testers_Configuration:" << std::endl;
 	std::cout << "-- Child_Tester_Name:  " << argv[2] << std::endl;
 	std::cout << "-- Receive_From:  " << argv[3] << std::endl;
-	std::cout << "-- Tester_Port:  " << stoi(argv[4]) << std::endl;
+	std::cout << "-- Tester_Port:  " << std::stoi(argv[4]) << std::endl;
 	std::cout << "-- Sending_To:  " << argv[0] << std::endl;
-	std::cout << "-- Server_Port:  " << stoi(argv[1]) << std::endl;
+	std::cout << "-- Server_Port:  " << std::stoi(argv[1]) << std::endl;
 	std::cout << "-- Sending_Files_Path:  " << argv[5] << std::endl;
 	std::cout << "-- Receiving_Files_Path:  " << argv[6] << std::endl;
 

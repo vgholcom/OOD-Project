@@ -1,0 +1,31 @@
+
+
+-------------------- Initializing Child Tester --------------------
+
+-- Testing time: Fri Jun 12 18:53:35 2020
+-- Log path: ../TestLog/
+-- Tester Sending Mesage to Server: ready
+-------------------- Attention --------------------
+
+-- Tester localhost:8002 Has Received A Message: Req
+
+-------------------- Message Content --------------------
+
+-- Message Title: Req
+-- Message Command: testReq
+-- Message Operator: 
+-- Message From: localhost:8099
+-- Message File:                       Dll4.dll
+
+
+
+-------------------- Test Task Starts --------------------
+
+
+-- File Is Sucessfully Loaded: ../SaveFile\Dll4.dll
+-- Executing Tests Extracted From: ../SaveFile\Dll4.dll
+
+-------------------- Test Result --------------------
+
+
+-- All Tests Passed In The Test Driver Library: ../SaveFile\Dll4.dll-- ^;^

@@ -1,9 +1,11 @@
 /*
  *-------------------------------------
- * Barry L Armour, Huan Doan, Victoria Tenney, Yuexin Yu
+ * Yuexin Yu
  * CSE 687 Object Oriented Design C++
  * Syracuse University
  * Design Project: Test Harness
+ *
+ * Victoria Tenney
  *-------------------------------------
  * Defined the TestHarness class for
  * TestHarness package.
@@ -18,6 +20,7 @@
 #include "../SupportLibrary/Sockets/Sockets.h"
 #include "../SupportLibrary/Cpp11-BlockingQueue/Cpp11-BlockingQueue.h"
 #include "../SupportLibrary/Message/Message.h"
+#include "../SupportLibrary/Utilities/XmlReader.h"
 #include "../ChildTester/Child.h"
 #include <vector>
 

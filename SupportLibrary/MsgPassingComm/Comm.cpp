@@ -124,6 +124,7 @@ void Sender::start()
 			if(msg.containFile())
 			{
 				sendFile(msg);
+				sendXML(msg);
 			}
 			else
 			{
@@ -220,6 +221,30 @@ bool Sender::sendSingleFile(Message msg)
 	return true;
 }
 
+bool Sender::sendXML(Message msg)
+{
+	/*
+	Message msg_file_trans;
+	msg_file_trans.to(msg.to()); msg_file_trans.from(msg.from()); msg_file_trans.command("XMLmsg");
+	msg_file_trans.name(msg.name()); msg_file_trans.attribute("author", msg.value("author"));
+	msg_file_trans.attribute("xml", msg.value("xml"));
+
+	std::string msgString = msg.toString();
+	connecter.sendString(msgString); 
+	return true;
+	*/
+
+	Message msg_file_trans;
+	msg_file_trans.to(msg.to()); msg_file_trans.from(msg.from());
+	msg_file_trans.name(msg.name());
+	msg_file_trans.command("XMLmsg");
+	msg_file_trans.attribute("xml", msg.value("xml"));
+	std::string msgString = msg_file_trans.toString();
+	connecter.sendString(msgString);
+	return true;
+
+}
+
 bool Sender::sendFile(Message msg)
 {
 	Socket::byte rwBuffer[BlockSize];
@@ -234,6 +259,7 @@ bool Sender::sendFile(Message msg)
 	Message msg_file_trans;
 	msg_file_trans.to(msg.to()); msg_file_trans.from(msg.from()); msg_file_trans.command(msg.command());
 	msg_file_trans.name(msg.name()); msg_file_trans.attribute("author", msg.value("author"));
+	msg_file_trans.attribute("xml", msg.value("xml"));
 	for (int i = 0; i < dlls.size(); i++)
 	{
 		msg_file_trans.file(dlls[i]);
@@ -336,7 +362,7 @@ namespace MsgPassingCommunication
 				std::streamsize blockSize = msg.contentLength();
 				if (blockSize == 0)
 				{
-					std::cout << "\n-- Leaving A receiveFile...";
+					//std::cout << "\n-- Leaving A receiveFile...";
 					break;
 				}
 				Socket::byte terminator;
@@ -354,7 +380,7 @@ namespace MsgPassingCommunication
 
 				if (msgString.length() == 0)   // connection with sender lost
 				{
-					std::cout << "\n-- Leaving A receiveFile...";
+					//std::cout << "\n-- Leaving A receiveFile...";
 					break;
 				}
 
@@ -362,7 +388,7 @@ namespace MsgPassingCommunication
 
 				if (msg.contentLength() == 0)  // receiving complete
 				{
-					std::cout << "\n-- Leaving A receiveFile...";
+					//std::cout << "\n-- Leaving A receiveFile...";
 					break;
 				}
 			}

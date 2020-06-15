@@ -2,38 +2,34 @@
 
 -------------------- Initializing Child Tester --------------------
 
--- Testing time: Sun May 31 13:22:23 2020
+-- Testing time: Fri Jun 12 18:53:35 2020
 -- Log path: ../TestLog/
 -- Tester Sending Mesage to Server: ready
 -------------------- Attention --------------------
 
--- Tester localhost:8003 Has Received A Message: 1
+-- Tester localhost:8003 Has Received A Message: Req
 
 -------------------- Message Content --------------------
 
--- Message Title: 1
+-- Message Title: Req
 -- Message Command: testReq
--- Message Operator: TT
+-- Message Operator: 
 -- Message From: localhost:8099
--- Message File:                       TestDriver1.dll
+-- Message File:                       Dll3.dll
 
 
 
 -------------------- Test Task Starts --------------------
 
--- File Is Sucessfully Loaded: ../SaveFile\TestDriver1.dll
--- Executing Tests Extracted From: ../SaveFile\TestDriver1.dll
+
+-- File Is Sucessfully Loaded: ../SaveFile\Dll3.dll
+-- Executing Tests Extracted From: ../SaveFile\Dll3.dll
 
 -------------------- Test Result --------------------
 
--- All Tests Passed In The Test Driver Library: ../SaveFile\TestDriver1.dll-- ^;^
+-- At Least One Test Failed In The Test Driver Library: ../SaveFile\Dll3.dll--!
 
--- Detailed log file for each test library is named: log_1.txt
--- Test report summary is named: [Child_Tester_Name]_log.txt
--- Only test report summary will be sent back to client in the
--- form of Message.
---------------------------------------------------------
-
--- Send Logging Result Back To GUI Client...
-
-------------------------Test Ends-----------------------
+----  Successful to load DLL file with path: ../SaveFile\Dll3.dll
+Successful to locate the function createTest() in the dll
+Execute the callable object throw an error:
+bad_weak_ptr

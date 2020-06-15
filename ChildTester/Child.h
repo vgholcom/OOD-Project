@@ -8,10 +8,13 @@
 //////////////////////////////////////////////////////////////////
 /*
  *-------------------------------------
- * Barry L Armour, Huan Doan, Victoria Tenney, Yuexin Yu
+ * Yuexin Yu
  * CSE 687 Object Oriented Design C++
  * Syracuse University
  * Design Project: Test Harness
+ * yyu100@syr.edu
+ *
+ * Huan Doan
  *-------------------------------------
  * This package defines one class, Tester:
  * - Uses DllLoader to load libraries and extract tests.
@@ -27,6 +30,7 @@
 #include "../SupportLibrary/TestRequest/TestRequest.h"
 #include "../SupportLibrary/TestRequest/Properties.h"
 #include "../SupportLibrary/Loader/DllLoader.h"
+#include "../SupportLibrary/Logger/SingletonLoggerFactory.h"
 #include <iostream>
 #include <vector>
 #include <string>
@@ -59,7 +63,6 @@ namespace Testing
 
 	private:
 		std::thread recv;
-		DllLoader dllLoader_;
 		std::string name_;
 		std::string path_;
 		LoggerFactory* logger_factory;

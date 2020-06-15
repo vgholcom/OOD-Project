@@ -122,6 +122,7 @@ namespace MsgPassingCommunication
 	private:
 		bool sendSingleFile(Message msg);
 		bool sendFile(Message msg);
+		bool sendXML(Message msg);
 		BlockingQueue<Message> sndQ;
 		SocketConnecter connecter;
 		std::thread sendThread;

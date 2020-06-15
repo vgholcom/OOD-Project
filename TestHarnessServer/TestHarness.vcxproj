@@ -137,6 +137,9 @@
     <ProjectReference Include="..\SupportLibrary\Sockets\Sockets.vcxproj">
       <Project>{ca3129b8-1bf4-44c9-b116-53ec72d0bccb}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\SupportLibrary\Utilities\Utilities.vcxproj">
+      <Project>{462b43b2-8b13-4178-bf2a-903f76f1985c}</Project>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Process.h" />

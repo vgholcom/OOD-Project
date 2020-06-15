@@ -1,0 +1,35 @@
+
+
+-------------------- Initializing Child Tester --------------------
+
+-- Testing time: Fri Jun 12 18:53:35 2020
+-- Log path: ../TestLog/
+-- Tester Sending Mesage to Server: ready
+-------------------- Attention --------------------
+
+-- Tester localhost:8001 Has Received A Message: Req
+
+-------------------- Message Content --------------------
+
+-- Message Title: Req
+-- Message Command: testReq
+-- Message Operator: 
+-- Message From: localhost:8099
+-- Message File:                       Dll2.dll
+
+
+
+-------------------- Test Task Starts --------------------
+
+
+-- File Is Sucessfully Loaded: ../SaveFile\Dll2.dll
+-- Executing Tests Extracted From: ../SaveFile\Dll2.dll
+
+-------------------- Test Result --------------------
+
+-- At Least One Test Failed In The Test Driver Library: ../SaveFile\Dll2.dll--!
+
+----  Successful to load DLL file with path: ../SaveFile\Dll2.dll
+Successful to locate the function createTest() in the dll
+Execute the callable object throw an error:
+bad function call

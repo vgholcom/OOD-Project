@@ -1,34 +1,18 @@
-C:\Users\yuexi\Desktop\TestHarnessProject\Debug\GUI.exe.config
-C:\Users\yuexi\Desktop\TestHarnessProject\Debug\GUI.exe
-C:\Users\yuexi\Desktop\TestHarnessProject\Debug\GUI.pdb
-C:\Users\yuexi\Desktop\TestHarnessProject\ClientGUI\obj\Debug\MainWindow.g.cs
-C:\Users\yuexi\Desktop\TestHarnessProject\ClientGUI\obj\Debug\SelectionWindow.g.cs
-C:\Users\yuexi\Desktop\TestHarnessProject\ClientGUI\obj\Debug\App.g.cs
-C:\Users\yuexi\Desktop\TestHarnessProject\ClientGUI\obj\Debug\GUI_MarkupCompile.cache
-C:\Users\yuexi\Desktop\TestHarnessProject\ClientGUI\obj\Debug\GUI_MarkupCompile.lref
-C:\Users\yuexi\Desktop\TestHarnessProject\ClientGUI\obj\Debug\MainWindow.baml
-C:\Users\yuexi\Desktop\TestHarnessProject\ClientGUI\obj\Debug\SelectionWindow.baml
-C:\Users\yuexi\Desktop\TestHarnessProject\ClientGUI\obj\Debug\GUI.g.resources
-C:\Users\yuexi\Desktop\TestHarnessProject\ClientGUI\obj\Debug\GUI.Properties.Resources.resources
-C:\Users\yuexi\Desktop\TestHarnessProject\ClientGUI\obj\Debug\ClientGui.csproj.GenerateResource.cache
-C:\Users\yuexi\Desktop\TestHarnessProject\ClientGUI\obj\Debug\ClientGui.csproj.CopyComplete
-C:\Users\yuexi\Desktop\TestHarnessProject\ClientGUI\obj\Debug\GUI.exe
-C:\Users\yuexi\Desktop\TestHarnessProject\ClientGUI\obj\Debug\GUI.pdb
-C:\Users\Tori\source\repos\TestHarnessProject - Working-Ver-2\Debug\GUI.exe.config
-C:\Users\Tori\source\repos\TestHarnessProject - Working-Ver-2\Debug\GUI.exe
-C:\Users\Tori\source\repos\TestHarnessProject - Working-Ver-2\Debug\GUI.pdb
-C:\Users\Tori\source\repos\TestHarnessProject - Working-Ver-2\ClientGUI\obj\Debug\ClientGui.csprojAssemblyReference.cache
-C:\Users\Tori\source\repos\TestHarnessProject - Working-Ver-2\ClientGUI\obj\Debug\MainWindow.g.cs
-C:\Users\Tori\source\repos\TestHarnessProject - Working-Ver-2\ClientGUI\obj\Debug\SelectionWindow.g.cs
-C:\Users\Tori\source\repos\TestHarnessProject - Working-Ver-2\ClientGUI\obj\Debug\App.g.cs
-C:\Users\Tori\source\repos\TestHarnessProject - Working-Ver-2\ClientGUI\obj\Debug\GUI_MarkupCompile.cache
-C:\Users\Tori\source\repos\TestHarnessProject - Working-Ver-2\ClientGUI\obj\Debug\GUI_MarkupCompile.lref
-C:\Users\Tori\source\repos\TestHarnessProject - Working-Ver-2\ClientGUI\obj\Debug\MainWindow.baml
-C:\Users\Tori\source\repos\TestHarnessProject - Working-Ver-2\ClientGUI\obj\Debug\SelectionWindow.baml
-C:\Users\Tori\source\repos\TestHarnessProject - Working-Ver-2\ClientGUI\obj\Debug\GUI.g.resources
-C:\Users\Tori\source\repos\TestHarnessProject - Working-Ver-2\ClientGUI\obj\Debug\GUI.Properties.Resources.resources
-C:\Users\Tori\source\repos\TestHarnessProject - Working-Ver-2\ClientGUI\obj\Debug\ClientGui.csproj.GenerateResource.cache
-C:\Users\Tori\source\repos\TestHarnessProject - Working-Ver-2\ClientGUI\obj\Debug\ClientGui.csproj.CoreCompileInputs.cache
-C:\Users\Tori\source\repos\TestHarnessProject - Working-Ver-2\ClientGUI\obj\Debug\ClientGui.csproj.CopyComplete
-C:\Users\Tori\source\repos\TestHarnessProject - Working-Ver-2\ClientGUI\obj\Debug\GUI.exe
-C:\Users\Tori\source\repos\TestHarnessProject - Working-Ver-2\ClientGUI\obj\Debug\GUI.pdb
+C:\Users\Tori\source\repos\Project_4_TestHarness_Source_Code-master\Debug\GUI.exe.config
+C:\Users\Tori\source\repos\Project_4_TestHarness_Source_Code-master\Debug\GUI.exe
+C:\Users\Tori\source\repos\Project_4_TestHarness_Source_Code-master\Debug\GUI.pdb
+C:\Users\Tori\source\repos\Project_4_TestHarness_Source_Code-master\ClientGUI\obj\Debug\ClientGui.csprojAssemblyReference.cache
+C:\Users\Tori\source\repos\Project_4_TestHarness_Source_Code-master\ClientGUI\obj\Debug\MainWindow.g.cs
+C:\Users\Tori\source\repos\Project_4_TestHarness_Source_Code-master\ClientGUI\obj\Debug\SelectionWindow.g.cs
+C:\Users\Tori\source\repos\Project_4_TestHarness_Source_Code-master\ClientGUI\obj\Debug\App.g.cs
+C:\Users\Tori\source\repos\Project_4_TestHarness_Source_Code-master\ClientGUI\obj\Debug\GUI_MarkupCompile.cache
+C:\Users\Tori\source\repos\Project_4_TestHarness_Source_Code-master\ClientGUI\obj\Debug\GUI_MarkupCompile.lref
+C:\Users\Tori\source\repos\Project_4_TestHarness_Source_Code-master\ClientGUI\obj\Debug\MainWindow.baml
+C:\Users\Tori\source\repos\Project_4_TestHarness_Source_Code-master\ClientGUI\obj\Debug\SelectionWindow.baml
+C:\Users\Tori\source\repos\Project_4_TestHarness_Source_Code-master\ClientGUI\obj\Debug\GUI.g.resources
+C:\Users\Tori\source\repos\Project_4_TestHarness_Source_Code-master\ClientGUI\obj\Debug\GUI.Properties.Resources.resources
+C:\Users\Tori\source\repos\Project_4_TestHarness_Source_Code-master\ClientGUI\obj\Debug\ClientGui.csproj.GenerateResource.cache
+C:\Users\Tori\source\repos\Project_4_TestHarness_Source_Code-master\ClientGUI\obj\Debug\ClientGui.csproj.CoreCompileInputs.cache
+C:\Users\Tori\source\repos\Project_4_TestHarness_Source_Code-master\ClientGUI\obj\Debug\ClientGui.csproj.CopyComplete
+C:\Users\Tori\source\repos\Project_4_TestHarness_Source_Code-master\ClientGUI\obj\Debug\GUI.exe
+C:\Users\Tori\source\repos\Project_4_TestHarness_Source_Code-master\ClientGUI\obj\Debug\GUI.pdb

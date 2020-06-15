@@ -1,0 +1,2 @@
+C:\Users\Tori\source\repos\Project_4_TestHarness_Source_Code-master\Debug\CommLibWrapper.pdb
+C:\Users\Tori\source\repos\Project_4_TestHarness_Source_Code-master\SupportLibrary\CommLibWrapper\Debug\CommLibWrapper.pdb

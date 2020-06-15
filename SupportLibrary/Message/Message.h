@@ -114,6 +114,8 @@ namespace MsgPassingCommunication
 	  void command(const std::string& cmd);
 	  std::string file();
 	  void file(const std::string& fl);
+	  std::string xml();
+	  void xml(const std::string& x);
 	  size_t contentLength();
 	  void contentLength(size_t ln);
 	  void clear();

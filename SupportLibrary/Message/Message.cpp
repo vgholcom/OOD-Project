@@ -182,13 +182,28 @@ std::string Message::file()
     }
     return "";
 }
+//----< set xml name attribute >--------------------------------------
+
+void Message::xml(const std::string& x)
+{
+    attributes_["xml"] = x;
+}
+//----< get xml name attribute >--------------------------------------
+
+std::string Message::xml()
+{
+    if (containsKey("xml"))
+    {
+        return attributes_["xml"];
+    }
+    return "";
+}
 //----< set file name attribute >--------------------------------------
 
 void Message::file(const std::string& fl)
 {
     attributes_["sendingFile"] = fl;
 }
-
 
 //----< get body length >----------------------------------------------
 

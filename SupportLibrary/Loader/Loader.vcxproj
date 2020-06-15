@@ -146,6 +146,7 @@
   <ItemGroup>
     <ClInclude Include="DllLoader.h" />
     <ClInclude Include="IHostedResource.h" />
+    <ClInclude Include="ITest.h" />
     <ClInclude Include="ITests.h" />
   </ItemGroup>
   <ItemGroup>

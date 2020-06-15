@@ -1,137 +1,83 @@
-﻿////////////////////////////////////////////////////////////////////////////
-// DllLoader.cpp : implementation and testing for DllLoader.h             //
-// ver 2.0                                                                //
-//                                                                        //
-// Platform    : VS17 Community - Windows 10 Professional x64             //
-////////////////////////////////////////////////////////////////////////////
-/*
-*  Package description:
-* ======================
-*  This package loads Test-Driver Libraries (DLLs) that follow the ITests
-*  protocol defined in ITests.h
-*
-*  The protocol forces all TestDrivers to have an implementation of ITests
-*  interface which holds a collection of ITest pointers. This package will
-*  attempt to load the DLL, get an instance of ITests* and retrieve the
-*  std::vector<ITest*> contained within the DLL.
-*/
-
-#include "DllLoader.h"
-#include "IHostedResource.h"
-#include "../Utilities/TestUtilities.h"
+﻿#include "DllLoader.h"
+#include <codecvt>
+#include <locale>
+#include "ITest.h"
 #include <iostream>
-#include <direct.h>
 
-using namespace std;
-using namespace Utilities;
-//#define LOADER_TEST
+typedef ITest* (*ITest_Factory)();
 
-//----< string converter using std C++ >-----------------------------
+using std::exception;
 
-std::wstring toWstring(const std::string& s)
+DllLoader::DllLoader(const string& dll_path)
 {
-	std::wstring wstr;
-	for (auto ch : s)
-	{
-		wstr += (wchar_t)ch;
-	}
-	return wstr;  // will move
+	itest_result_ = false;
+	dll_path_ = dll_path;
+	std::wstring w_dll_path = std::wstring_convert<std::codecvt_utf8<wchar_t>>().from_bytes(dll_path_);
+	hDll_ = LoadLibrary(w_dll_path.c_str());
 }
 
-DllLoader::DllLoader() {}
+void DllLoader::TestITest()
+{
+	if (hDll_ == NULL) {
+		appendLogMessage("Failed to load DLL file with path: " + dll_path_);
+		itest_result_ = false;
+	}
+	else {
+		appendLogMessage("Successful to load DLL file with path: " + dll_path_);
+		ITest_Factory createTest = (ITest_Factory)GetProcAddress(hDll_, "createTest");
+
+		if (createTest == NULL) {
+			appendLogMessage("Failed to locate the function createTest() in the dll");
+			itest_result_ = false;
+		}
+		else {
+			appendLogMessage("Successful to locate the function createTest() in the dll");
+			ITest* pTest = createTest();
+			//itest_result_ = pTest->test();
+			//itest_result_ = pTest->operator()();
+			try {
+				itest_result_ = (*pTest)();
+				appendLogMessage("Successful execute the callable object without error and return result");
+			}
+			catch (const exception& ex) {
+				appendLogMessage("Execute the callable object throw an error:");
+				appendLogMessage(ex.what());
+				itest_result_ = false;
+			}
+			delete pTest;
+		}
+	}
+}
 
 DllLoader::~DllLoader()
 {
-	clear(); // to make sure the DLL is unloaded
+	FreeLibrary(hDll_);
 }
 
-//----< uses TestUtilities Infrastructure >--------------------------
-bool doTests(DllLoader& loader, Utilities::SingletonLoggerFactory<1, Utilities::NoLock>* pRes)
+
+string DllLoader::getDllPath() const
 {
-	using sPtr = std::shared_ptr<ITest>;
-	Utilities::TestExecutive te;
-	for (ITest* test : loader.tests()) {
-		// Host passes resource pointer to test - test will use hr via this pointer
-		test->acceptHostedResource(pRes);
-		sPtr pTest(test);
-		te.registerTest(pTest, pTest->name());
-	}
-	return te.doTests();
+	return dll_path_;
 }
 
-// accepts a DLL path and attempts to load it and extract its tests
-bool DllLoader::loadAndExtract(const std::string & dll)
+TestResult DllLoader::getTestResult() const
 {
-	hmod = LoadLibrary(toWstring(dll).c_str()); // load DLL
-	// check if DLL was properly loaded
-	if (!hmod)
-		return false;
-
-	// check if the DLL contains get_ITests() function ...
-	// in other words, check if the DLL complies with the protocol
-
-	using gITs = ITests * (*)();  // using instead of typedef
-
-	gITs get_ITests = (gITs)GetProcAddress(hmod, "get_ITests");
-	if (!get_ITests)
-		return false;
-
-	// execute get_ITests() to get the collection of tests
-	ITests* tests = get_ITests();
-	if (tests) { // check if tests is nullptr before attempting to get its tests collection
-		std::vector<ITest*> extTsts = tests->tests();
-		extractedTests_.insert(extractedTests_.begin(), extTsts.begin(), extTsts.end());
-		return true;
-	}
-	// this will only be reached if get_ITests() returned nullptr in which case the 
-	// TestDriver DLL contains no tests to execute.
-	return false;
+	TestResult testResult{ getDllPath(), getItestBoolResult(), getLogMessage() };
+	return testResult;
 }
 
-//----< return a set of tests >-----------------------------
-const std::vector<ITest*>& DllLoader::tests() const
+string DllLoader::getLogMessage() const
 {
-	return extractedTests_;
+	return log_message_;
 }
 
-//----< unloads the DLL (if loaded) and clears all extracted tests >-----------------------------
-void DllLoader::clear()
+bool DllLoader::getItestBoolResult() const
 {
-	if (hmod) FreeLibrary(hmod);
-	extractedTests_.clear();
+	return itest_result_;
 }
 
-//#define LOADER_TEST
-
-#ifdef LOADER_TEST
-
-int main() {
-	/*		Test Stub		*/
-	cout << "\n  Testing DLL Loader";
-	cout << "\n ====================";
-	DllLoader loader;
-	cout << "\n  Loading '../Debug/TestDriver1.dll' which is a single-test TestDriver...";
-	bool loaded = loader.loadAndExtract("../Debug/TestDriver1.dll");
-	if (!loaded)
-	{
-		cout << " failed to load dll or failed to load tests.\n    Terminating...\n";
-		return -1;
-	}
-	cout << " successfully loaded"; cout << "\n    Extracted tests:\n";
-	Utilities::SingletonLoggerFactory<1, Utilities::NoLock>* td_logger = 0;
-	doTests(loader, td_logger);
-	cout << "\n  Loading '../Debug/TestDriver2.dll' which is a multiple-tests TestDriver ...";
-	loader.clear();
-	loaded = loader.loadAndExtract("../Debug/TestDriver2.dll");
-	if (!loaded) {
-		cout << " failed to load dll or failed to load tests.\n    Terminating...\n";
-		return -1;
-	}
-	cout << " successfully loaded";
-	cout << "\n    Extracted tests:\n";
-	Utilities::SingletonLoggerFactory<1, Utilities::NoLock>* td_logger_2 = 0;
-	doTests(loader, td_logger_2);
-	cout << "\n\n";
-	return 0;
+void DllLoader::appendLogMessage(const string& message)
+{
+	log_message_ += message;
+	log_message_ += "\n";
 }
-#endif

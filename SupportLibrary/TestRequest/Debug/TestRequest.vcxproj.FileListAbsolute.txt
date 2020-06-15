@@ -1,2 +1,2 @@
-C:\Users\Tori\source\repos\TestHarnessProject - Working-Ver-2\Debug\TestRequest.pdb
-C:\Users\Tori\source\repos\TestHarnessProject - Working-Ver-2\SupportLibrary\TestRequest\Debug\TestRequest.pdb
+C:\Users\Tori\source\repos\Project_4_TestHarness_Source_Code-master\Debug\TestRequest.pdb
+C:\Users\Tori\source\repos\Project_4_TestHarness_Source_Code-master\SupportLibrary\TestRequest\Debug\TestRequest.pdb

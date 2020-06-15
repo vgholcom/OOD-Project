@@ -5,6 +5,8 @@
 // Design Project: Test Harness                                     //
 // yyu100@syr.edu                                                   //
 //                                                                  //
+// Barry Armour                                                     //
+//                                                                  //
 // MainWindow class                                                 //
 // - Navigate through local directory to find dll files for testing //
 // - Displays local directories and files                           //
@@ -32,7 +34,8 @@ using System.Threading;
 using System.IO;
 using System.Diagnostics;
 using MsgPassingCommunication;
-
+using System.Xml;
+using System.Xml.Linq;
 
 namespace GUI
 {
@@ -354,11 +357,25 @@ namespace GUI
         // Send message to Testharness server
         private void Send_Click(object sender, RoutedEventArgs e)
         {
+            XElement xml = new XElement("Request",
+                new XElement("to", to_string),
+                new XElement("from", from_string),
+                new XElement("name", tq_name.Text.ToString()),
+                new XElement("author", tq_author.Text.ToString()),
+                new XElement("command", "testReq"),
+                new XElement("num_files", show_dlls.Items.Count.ToString()),
+                new XElement("DLLs",
+                show_dlls.Items.OfType<string>().Select(item => new XElement("file", System.IO.Path.GetFileName(item))))
+            );
+
+            string xmlStr = xml.ToString();
+            xmlStr = xmlStr.Replace("\r", "").Replace("\n", "");
             msg.add("to", to_string);
             msg.add("from", from_string);
-            msg.add("name", tq_name.Text.ToString()); 
+            msg.add("name", tq_name.Text.ToString());
             msg.add("author", tq_author.Text.ToString());
             msg.add("command", "testReq");
+            msg.add("xml", xmlStr);
 
             update_status("Sending test request to Test Harness server @" + to_string);
 
